@@ -26,3 +26,8 @@ dropout=0.2,lr=0.001
 ### 注意力机制 heads=4,dropout=0.2,lr=0.0001 RELU
 * 3000 epoch ,Loss*1000 0.00000008, score 0.7480
 * 1000 epoch ,Loss*1000 0.00015600, score 0.7501
+### FC_Split_Attention
+* 1000 epoch ,Loss*1000 12.30 ,score 0.82933
+* 2000 epoch ,Loss*1000 8.5299 ,score 0.83466
+* 4000 epoch ,Loss*1000  0.5674 ,score 0.8520
+* 

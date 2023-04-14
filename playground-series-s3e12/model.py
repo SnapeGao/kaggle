@@ -19,31 +19,32 @@ class FC_Split_Attention(nn.Module):
         self.relu = nn.ReLU()
         self.softmax = nn.Softmax(dim=1)
         self.dropout = nn.Dropout(p=self.args.dropout)
-        self.LN_embedding_size= nn.LayerNorm(self.args.embedding_size)
-        self.LN_num_features=nn.LayerNorm(self.args.num_features)
-        self.BN_num_features=nn.BatchNorm1d(self.args.num_features)
+        self.LN_embedding_size = nn.LayerNorm(self.args.embedding_size)
+        self.LN_num_features = nn.LayerNorm(self.args.num_features)
+        self.BN_num_features = nn.BatchNorm1d(self.args.num_features)
+
     def forward(self, x):
         x_in = self.dropout(self.relu(self.readin(x)))
         left_x = self.leftFC(x_in)
         right_x = self.rightFC1(x_in)
-        right_x=right_x + left_x
+        right_x = right_x + left_x
 
         # right_x = self.LN_embedding_size(right_x)
 
         right_x = self.rightFC2(right_x)
-        midd_x=left_x + right_x
+        midd_x = left_x + right_x
 
         # midd_x = self.LN_embedding_size(midd_x)
 
         midd_x = self.dropout(self.relu(self.middFC1(midd_x)))
-        midd_x=self.BN_num_features(midd_x)
+        midd_x = self.BN_num_features(midd_x)
 
         midd_x = self.softmax(self.middFC2(midd_x))
-        midd_x=midd_x.unsqueeze(-1)
-        left_x=left_x.unsqueeze(-2)
-        right_x=right_x.unsqueeze(-2)
-        midd_x1 = torch.matmul(midd_x,left_x)
-        midd_x2 = torch.matmul(midd_x,right_x)
+        midd_x = midd_x.unsqueeze(-1)
+        left_x = left_x.unsqueeze(-2)
+        right_x = right_x.unsqueeze(-2)
+        midd_x1 = torch.matmul(midd_x, left_x)
+        midd_x2 = torch.matmul(midd_x, right_x)
         midd_x = midd_x1 + midd_x2
 
         midd_x = self.lastFC(midd_x).squeeze()
