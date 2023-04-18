@@ -22,7 +22,7 @@ dropout=0.2,lr=0.001
 ### 加入残差 dropout=0.2,lr=0.0001 RELU
 * 2000 epoch ,Loss 0.0025, score 0.8533
 ### 注意力机制 heads=2,dropout=0.2,lr=0.0001 RELU
-* 2000 epoch ,Loss 0.0033, score 0.8653
+* 2000 epoch ,Loss 0.0033, score 0.8653 √ 最终0.758 342/1090
 ### 注意力机制 heads=4,dropout=0.2,lr=0.0001 RELU
 * 3000 epoch ,Loss*1000 0.00000008, score 0.7480
 * 1000 epoch ,Loss*1000 0.00015600, score 0.7501
@@ -30,4 +30,3 @@ dropout=0.2,lr=0.001
 * 1000 epoch ,Loss*1000 12.30 ,score 0.82933
 * 2000 epoch ,Loss*1000 8.5299 ,score 0.83466
 * 4000 epoch ,Loss*1000  0.5674 ,score 0.8520
-* 
